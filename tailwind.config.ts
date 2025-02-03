@@ -8,9 +8,9 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+      // Add new styles: 
+      fontFamily: {
+        sans: ['Poppins', 'sans-serif']
       },
     },
   },
