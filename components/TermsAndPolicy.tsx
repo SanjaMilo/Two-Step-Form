@@ -5,11 +5,13 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 
 const TermsAndPolicy = () => {
-  const { stepNumber } = useStepContext();
+  const { stepNumber } = useStepContext()!;
+  const steps = 2;
+  const isLastStep = stepNumber === steps;
 
   return (
     <motion.p
-      initial={{ x: stepNumber >= 2 ? "50%" : "-50%", opacity: 0 }}
+      initial={{ x: isLastStep ? "50%" : "-50%", opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.2, ease: "easeInOut" }}
       className="mt-10 text-start text-sm/6 text-gray-500"

@@ -1,5 +1,3 @@
-"use client";
-
 import { LiaTimesSolid } from "react-icons/lia";
 
 const TermsAndConditionsPolicy = () => {

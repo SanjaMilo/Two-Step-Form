@@ -11,8 +11,7 @@ import { motion } from "framer-motion";
 import { z } from "zod";
 
 const MultiForm = () => {
-  const { stepNumber, setStepNumber, userData, setUserData, setErrorMessage } =
-    useStepContext();
+  const { stepNumber, setStepNumber, userData, setUserData, setErrorMessage } = useStepContext()!; // non-null assertion operator (!)
   const steps = 2;
   const isFirstStep = stepNumber === 1;
   const isLastStep = stepNumber === steps;
@@ -40,7 +39,9 @@ const MultiForm = () => {
   });
 
   const formTwoSchema = z.object({
-    prefix: z.string().min(2, "Country phone prefix is required"),
+    prefix: z.string().regex(/^\+\d+$/, {
+      message: "Phone number must start with '+' followed by numbers.",
+    }).min(2, "Phone prefix must be at least 2 characters long"),
     phoneNumber: z
       .string()
       .regex(
@@ -90,25 +91,32 @@ const MultiForm = () => {
           [issue.path[0]]: issue.message,
         };
       }
-      console.log(newErrors);
+      
       return setErrorMessage(newErrors);
     }
-    console.log("Submitting data", userData);
-    setUserData({});
+    
+    // No API fetch od Database implementation
+    setUserData({
+      firstName: "",
+      lastName: "",
+      prefix: "+44",
+      phoneNumber: "",
+    });
     setErrorMessage({});
     setStepNumber(1);
+
     router.push("/dashboard");
   };
 
   return (
     <motion.div
-      initial={{ x: stepNumber >= 2 ? "50%" : "-50%", opacity: 0 }}
+      initial={{ x: isLastStep ? "50%" : "-50%", opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.2, ease: "easeInOut" }}
       className="mt-4 sm:mx-auto sm:w-full sm:max-w-sm"
     >
       <motion.h2
-        initial={{ x: stepNumber >= 2 ? "50%" : "-50%", opacity: 0 }}
+        initial={{ x: isLastStep ? "50%" : "-50%", opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.2, ease: "easeInOut" }}
         className="my-5 text-xl font-bold tracking-tight text-gray-900"

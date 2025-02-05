@@ -2,9 +2,12 @@
 
 import { useStepContext } from "@/context/GlobalContext";
 import { motion } from "framer-motion";
+import { AiOutlineExclamationCircle } from "react-icons/ai";
 
 const FormStepOne = () => {
-  const { stepNumber, setUserData, userData, errorMessage } = useStepContext();
+  const { stepNumber, setUserData, userData, errorMessage } = useStepContext()!;
+  const redBorderFirstName = errorMessage.firstName ? "outline-red-500" : "outline-gray-300";
+  const redBorderLastName = errorMessage.lastName ? "outline-red-500" : "outline-gray-300";
 
   return (
     <motion.div
@@ -30,11 +33,12 @@ const FormStepOne = () => {
             name="firstName"
             type="text"
             required
-            className="block w-full rounded-3xl bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 outline placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm/6"
+            className={`block w-full rounded-3xl bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 outline placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm/6 ${redBorderFirstName}`}
           />
         </div>
         {errorMessage.firstName && (
           <p className="mt-1 mb-5 text-start text-sm/6 text-red-500">
+            <AiOutlineExclamationCircle className="inline align-baseline mr-1" />
             {errorMessage.firstName}
           </p>
         )}
@@ -59,11 +63,12 @@ const FormStepOne = () => {
             name="lastName"
             type="text"
             required
-            className="block w-full rounded-3xl bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 outline placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm/6"
+            className={`block w-full rounded-3xl bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 outline placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm/6 ${redBorderLastName}`}
           />
         </div>
         {errorMessage.lastName && (
           <p className="mt-1 mb-5 text-start text-sm/6 text-red-500">
+            <AiOutlineExclamationCircle className="inline align-baseline mr-1" />
             {errorMessage.lastName}
           </p>
         )}

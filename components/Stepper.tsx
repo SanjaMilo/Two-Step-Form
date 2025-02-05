@@ -5,7 +5,7 @@ import { Bs1CircleFill, Bs2CircleFill } from "react-icons/bs";
 import { useStepContext } from "@/context/GlobalContext";
 
 const Stepper = () => {
-  const { stepNumber } = useStepContext();
+  const { stepNumber } = useStepContext()!;
   const steps = 2;
   const isFirstStep = stepNumber === 1;
   const isLastStep = stepNumber === steps;

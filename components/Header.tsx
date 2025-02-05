@@ -7,7 +7,7 @@ import Stepper from "./Stepper";
 import { useStepContext } from "@/context/GlobalContext";
 
 const Header = () => {
-  const { stepNumber, setStepNumber } = useStepContext();
+  const { stepNumber, setStepNumber } = useStepContext()!;
   const isFirstStep = stepNumber === 1;
 
   const backStep = () => {
